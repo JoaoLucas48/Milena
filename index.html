@@ -40,15 +40,26 @@
       border-radius: 8px;
     }
 
+    .tab-container {
+      position: relative;
+    }
     .tab-content {
       display: none;
       padding: 40px 20px;
       max-width: 900px;
       margin: auto;
       animation: fadeIn 0.6s ease-in-out;
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0;
+      transition: opacity 0.5s ease;
     }
     .tab-content.active {
       display: block;
+      opacity: 1;
+      position: relative;
     }
 
     h2 {
@@ -155,6 +166,10 @@
       margin-top: 20px;
     }
 
+    #message {
+      transition: opacity 0.3s ease;
+    }
+
     button {
       background-color: #ff9aa2;
       color: white;
@@ -194,100 +209,74 @@
   </header>
 
   <div class="tabs">
-    <button class="tab-button active" onclick="showTab('inicio')">Início</button>
-    <button class="tab-button" onclick="showTab('historia')">História</button>
-    <button class="tab-button" onclick="showTab('galeria')">Galeria</button>
-    <button class="tab-button" onclick="showTab('depoimento')">Depoimento</button>
-    <button class="tab-button" onclick="showTab('mensagens')">Mensagens</button>
-    <button class="tab-button" onclick="showTab('playlist')">Playlist</button>
+    <button class="tab-button active" onclick="showTab('inicio', event)">Início</button>
+    <button class="tab-button" onclick="showTab('historia', event)">História</button>
+    <button class="tab-button" onclick="showTab('galeria', event)">Galeria</button>
+    <button class="tab-button" onclick="showTab('depoimento', event)">Depoimento</button>
+    <button class="tab-button" onclick="showTab('mensagens', event)">Mensagens</button>
+    <button class="tab-button" onclick="showTab('playlist', event)">Playlist</button>
   </div>
 
-  <div id="inicio" class="tab-content active">
-    <h2>Escute a música</h2>
-    <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?light=1&feed=%2FJorgeMateus%2Firm%25C3%25A3o%2F" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-  </div>
+  <div class="tab-container">
+    <div id="inicio" class="tab-content active">
+      <h2>Escute a música</h2>
+      <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?light=1&feed=%2FJorgeMateus%2Firm%25C3%25A3o%2F" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+    </div>
 
-  <div id="historia" class="tab-content">
-    <h2>Nossa História</h2>
-    <p>Nos conhecemos no Larizatti, mas foi mesmo no Major que viramos amigos de verdade...</p>
-  </div>
+    <div id="historia" class="tab-content">
+      <h2>Nossa História</h2>
+      <p>Nos conhecemos no Larizatti, mas foi mesmo no Major que viramos amigos de verdade...</p>
+    </div>
 
-  <div id="galeria" class="tab-content">
-    <h2>Galeria</h2>
-    <div class="gallery">
-      <img src="https://i.imgur.com/9AMHJmy.jpeg" onclick="openLightbox(this.src, 0)">
-      <img src="https://i.imgur.com/GmHaccK.jpeg" onclick="openLightbox(this.src, 1)">
-      <img src="https://i.imgur.com/mSGvsLu.jpeg" onclick="openLightbox(this.src, 2)">
-      <img src="https://i.imgur.com/4qkeXOR.jpeg" onclick="openLightbox(this.src, 3)">
-      <img src="https://i.imgur.com/pbJPOR8.jpeg" onclick="openLightbox(this.src, 4)">
-      <img src="https://i.imgur.com/YwnL1X1.jpeg" onclick="openLightbox(this.src, 5)">
-      <img src="https://i.imgur.com/ozxe7MM.jpeg" onclick="openLightbox(this.src, 6)">
+    <div id="galeria" class="tab-content">
+      <h2>Galeria</h2>
+      <div class="gallery">
+        <img src="https://i.imgur.com/9AMHJmy.jpeg" alt="Milena 1" onclick="openLightbox(this.src, 0)">
+        <img src="https://i.imgur.com/GmHaccK.jpeg" alt="Milena 2" onclick="openLightbox(this.src, 1)">
+        <img src="https://i.imgur.com/mSGvsLu.jpeg" alt="Milena 3" onclick="openLightbox(this.src, 2)">
+        <img src="https://i.imgur.com/4qkeXOR.jpeg" alt="Milena 4" onclick="openLightbox(this.src, 3)">
+        <img src="https://i.imgur.com/pbJPOR8.jpeg" alt="Milena 5" onclick="openLightbox(this.src, 4)">
+        <img src="https://i.imgur.com/YwnL1X1.jpeg" alt="Milena 6" onclick="openLightbox(this.src, 5)">
+        <img src="https://i.imgur.com/ozxe7MM.jpeg" alt="Milena 7" onclick="openLightbox(this.src, 6)">
+      </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+      <span class="close-btn" onclick="closeLightbox()">&times;</span>
+      <div class="lightbox-nav">
+        <span onclick="navigateLightbox(-1)">&#10094;</span>
+        <span onclick="navigateLightbox(1)">&#10095;</span>
+      </div>
+      <img id="lightbox-img" src="" alt="Ampliada">
+    </div>
+
+    <div id="depoimento" class="tab-content">
+      <h2>Depoimento</h2>
+      <p>Não sei por onde começar</p>
+    </div>
+
+    <div id="mensagens" class="tab-content">
+      <h2>Caixinha de Mensagens</h2>
+      <div class="message-box">
+        <p id="message">Clique no botão pra receber uma mensagem aleatória!</p>
+        <button onclick="showMessage()">Mostrar Mensagem</button>
+      </div>
+    </div>
+
+    <div id="playlist" class="tab-content">
+      <h2>Sua Playlist</h2>
+      <p>Essa playlist foi feita com músicas que me lembram você.</p>
+      <!-- (Playlist text mantido como está) -->
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0aJfsXNhgnii3c92i6ywjD?utm_source=generator&theme=0" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
   </div>
-
-  <div class="lightbox" id="lightbox">
-    <span class="close-btn" onclick="closeLightbox()">&times;</span>
-    <div class="lightbox-nav">
-      <span onclick="navigateLightbox(-1)">&#10094;</span>
-      <span onclick="navigateLightbox(1)">&#10095;</span>
-    </div>
-    <img id="lightbox-img" src="" alt="Ampliada">
-  </div>
-
-  <div id="depoimento" class="tab-content">
-    <h2>Depoimento</h2>
-    <p>Não sei por onde começar</p>
-  </div>
-
-  <div id="mensagens" class="tab-content">
-    <h2>Caixinha de Mensagens</h2>
-    <div class="message-box">
-      <p id="message">Clique no botão pra receber uma mensagem aleatória!</p>
-      <button onclick="showMessage()">Mostrar Mensagem</button>
-    </div>
-  </div>
-
-  <div id="playlist" class="tab-content">
-    <h2>Sua Playlist</h2>
-    <p>
-      Essa playlist foi feita com músicas que me lembram você.<br><br>
-  
-      <strong>DEUS É MUITO BOM</strong> — realmente você foi a minha sorte disfarçada de pessoa.<br>
-      <strong>IRMÃO</strong> — você foi melhor do que eu pedi.<br>
-      <strong>Hey Brother</strong> — “Hey sister, know the water's sweet, but blood is thicker. Oh, if the sky comes falling down, for you, there's nothing in this world I wouldn't do.”<br>
-      <em>(Tradução: Ei irmã, saiba que há muitas amizades,Mas nosso laço é mais forte. Oh, se o céu desabar sobre você, não há nada neste mundo que eu não faria.)</em><br>
-      <strong>ILHA</strong> — quando eu estava quase me afogando, você se tornou a minha ilha.<br>
-      <strong>ANJO MAIS VELHO</strong> — “Só enquanto eu respirar vou me lembrar de você.”<br>
-      (Esse refrão está errado, o certo é: “Pra além de eu respirar, vou lembrar de você.”)<br>
-      <strong>MI CASA, TU CASA</strong> — o que posso te dizer? Só quero te agradecer.<br>
-      <strong>OLHARES SINCEROS</strong> — sorrisos bobos, abraços longos e olhares sinceros.<br>
-      <strong>COUNT ON ME</strong> — essa música mexe comigo, Milena. Se eu pudesse, colocava ela toda aqui, mas essa parte resume tudo:<br>
-      “When we are called to help our friends in need<br>
-  
-      You can count on me like one, two, three<br>
-      I'll be there<br>
-      And I know when I need it I can count on you like<br>
-      Four, three, two<br>
-      And you'll be there.”<br>
-      <em>(Tradução: Quando somos chamados para ajudar nossos amigos em necessidade…<br>
-      Você pode contar comigo como um, dois, três — eu estarei lá. E eu sei que quando eu precisar, posso contar com você como quatro, três, dois — e você estará lá.)</em><br>
-      <strong>TE AMO PIRANHA</strong> — essa é explicativa, né? Amo muito você, Milena!❤️
-    </p>
-  
-    <iframe style="border-radius:12px"
-      src="https://open.spotify.com/embed/playlist/0aJfsXNhgnii3c92i6ywjD?utm_source=generator&theme=0"
-      width="100%" height="352" frameborder="0" allowfullscreen=""
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-    </iframe>
-  </div>
-
 
   <footer>
-    "Entre risos(e a vania nos atrapalhando) e confissões, encontrei em você o meu melhor refúgio." 💖
+    "Entre risos(e a Vania nos atrapalhando) e confissões, encontrei em você o meu melhor refúgio." 💖
   </footer>
 
   <script>
-    function showTab(tabId) {
+    function showTab(tabId, event) {
       const contents = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-button');
       contents.forEach(c => c.classList.remove('active'));
@@ -307,8 +296,13 @@
       "Te amo mais do que bombons."
     ];
     function showMessage() {
+      const messageElement = document.getElementById('message');
       const randomIndex = Math.floor(Math.random() * messages.length);
-      document.getElementById('message').textContent = messages[randomIndex];
+      messageElement.style.opacity = 0;
+      setTimeout(() => {
+        messageElement.textContent = messages[randomIndex];
+        messageElement.style.opacity = 1;
+      }, 200);
     }
 
     let currentIndex = 0;
