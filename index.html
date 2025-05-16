@@ -219,7 +219,7 @@
 
   <div class="tabs">
    <button class="tab-button active" onclick="showTab('inicio', event)">Início</button>
-    <button class="tab-button" onclick="showTab('memorias, event')">Memórias</button>
+    <button class="tab-button" onclick="showTab('memorias', event)">Memórias</button>
     <button class="tab-button" onclick="showTab('galeria')">Galeria</button>
     <button class="tab-button" onclick="showTab('depoimento')">Depoimento</button>
     <button class="tab-button" onclick="showTab('mensagens')">Mensagens</button>
@@ -400,7 +400,7 @@
   </div>
 
   <footer>
-    "Entre risos(e a vania nos atrapalhando) e confissões, encontrei em você o meu melhor refúgio." 💖
+    "Entre risos (e a Vânia nos atrapalhando) e confissões, encontrei em você o meu melhor refúgio." 💖
   </footer>
 
   <script>
@@ -473,6 +473,36 @@ function navigateLightbox(direction) {
   }
   const lightboxImg = document.getElementById('lightbox-img');
   lightboxImg.src = images[currentIndex];
+}
+// Suporte a swipe no lightbox (para mobile)
+let touchStartX = 0;
+let touchEndX = 0;
+
+const lightboxImg = document.getElementById('lightbox-img');
+const lightbox = document.getElementById('lightbox');
+
+lightbox.addEventListener('touchstart', function (e) {
+  touchStartX = e.changedTouches[0].screenX;
+}, false);
+
+lightbox.addEventListener('touchend', function (e) {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipeGesture();
+}, false);
+
+function handleSwipeGesture() {
+  const swipeThreshold = 50; // distância mínima para considerar swipe
+  const deltaX = touchEndX - touchStartX;
+
+  if (Math.abs(deltaX) > swipeThreshold) {
+    if (deltaX > 0) {
+      // Swipe para direita → imagem anterior
+      navigateLightbox(-1);
+    } else {
+      // Swipe para esquerda → próxima imagem
+      navigateLightbox(1);
+    }
+  }
 }
 
 
