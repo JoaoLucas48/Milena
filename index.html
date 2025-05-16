@@ -441,32 +441,40 @@ function showMessage() {
 
 
     let currentIndex = 0;
-    const images = [
-      "https://i.imgur.com/9AMHJmy.jpeg",
-      "https://i.imgur.com/GmHaccK.jpeg",
-      "https://i.imgur.com/mSGvsLu.jpeg",
-      "https://i.imgur.com/4qkeXOR.jpeg",
-      "https://i.imgur.com/pbJPOR8.jpeg",
-      "https://i.imgur.com/YwnL1X1.jpeg",
-      "https://i.imgur.com/ozxe7MM.jpeg"
-    ];
+const images = [
+  "https://i.imgur.com/9AMHJmy.jpeg",
+  "https://i.imgur.com/GmHaccK.jpeg",
+  "https://i.imgur.com/mSGvsLu.jpeg",
+  "https://i.imgur.com/4qkeXOR.jpeg",
+  "https://i.imgur.com/pbJPOR8.jpeg",
+  "https://i.imgur.com/YwnL1X1.jpeg",
+  "https://i.imgur.com/ozxe7MM.jpeg"
+];
 
-    function openLightbox(src, index) {
-      currentIndex = index;
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('active');
-    }
+function openLightbox(src, index) {
+  currentIndex = index;
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  lightboxImg.src = src;
+  lightbox.classList.add('active');
+}
 
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-    }
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.classList.remove('active');
+}
 
-    function navigateLightbox(direction) {
-      currentIndex += direction;
-      if (currentIndex < 0) currentIndex = images.length - 1;
-      if (currentIndex >= images.length) currentIndex = 0;
-      document.getElementById('lightbox-img').src = images[currentIndex];
-    }
+function navigateLightbox(direction) {
+  currentIndex += direction;
+  if (currentIndex < 0) {
+    currentIndex = images.length - 1;
+  } else if (currentIndex >= images.length) {
+    currentIndex = 0;
+  }
+  const lightboxImg = document.getElementById('lightbox-img');
+  lightboxImg.src = images[currentIndex];
+}
+
 
     document.addEventListener('DOMContentLoaded', function () {
       // Efeito de corações caindo
