@@ -71,31 +71,28 @@
       font-size: 2.2rem;
       font-family: 'Pacifico', cursive;
     }
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
 
-.gallery img {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: calc(var(--i) * 0.15s); /* Atraso entre as imagens */
-}
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      margin-top: 20px;
+    }
 
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      max-width: 250px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
 
     .lightbox {
       display: none;
@@ -362,8 +359,8 @@
   <div id="mensagens" class="tab-content">
     <h2>Caixinha de Mensagens</h2>
     <div class="message-box">
-    <p id="message" class="fade">Clique no botão pra receber uma mensagem aleatória!</p>
-     <button onclick="showMessage()">Mostrar Mensagem</button>
+      <p id="message">Clique no botão pra receber uma mensagem aleatória!</p>
+      <button onclick="showMessage()">Mostrar Mensagem</button>
     </div>
   </div>
 
@@ -530,3 +527,4 @@ setInterval(createHeart, 300);
 
 </body>
 </html>
+
