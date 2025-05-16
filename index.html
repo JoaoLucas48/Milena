@@ -412,16 +412,8 @@
       event.target.classList.add('active');
     }
 
-    const messages = [
-      "Você me fez ver o mundo de uma forma diferente",
-      "Você é a razão por estar vivo até hoje",
-      "Você é a melhor coisa que já me aconteceu",
-      "Você é a razão pela qual eu não desisto de mim mesmo",
-      "Eu não sei o que seria de mim sem você",
-      "Você é a melhor amiga que alguém poderia ter",
-      "Não tem um dia sequer que eu não pense em você, se você está bem ou não",
-      "Te amo mais do que bombons."
-      "Você me fez ver o mundo de uma forma diferente",
+const messages = [
+  "Você me fez ver o mundo de uma forma diferente",
   "Você é a razão por estar vivo até hoje",
   "Você é a melhor coisa que já me aconteceu",
   "Você é a razão pela qual eu não desisto de mim mesmo",
@@ -439,11 +431,13 @@
   "Sua amizade é meu tesouro mais precioso.",
   "Você ilumina minha vida mesmo quando tudo parece escuro.",
   "Só de saber que posso contar com você, meu coração fica em paz."
-    ];
-    function showMessage() {
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      document.getElementById('message').textContent = messages[randomIndex];
-    }
+];
+
+function showMessage() {
+  const randomIndex = Math.floor(Math.random() * messages.length);
+  document.getElementById('message').textContent = messages[randomIndex];
+}
+
 
     let currentIndex = 0;
     const images = [
