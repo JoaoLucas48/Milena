@@ -219,7 +219,7 @@
 
   <div class="tabs">
    <button class="tab-button active" onclick="showTab('inicio', event)">Início</button>
-    <button class="tab-button" onclick="showTab('memorias')">Memórias</button>
+    <button class="tab-button" onclick="showTab('memorias, event')">Memórias</button>
     <button class="tab-button" onclick="showTab('galeria')">Galeria</button>
     <button class="tab-button" onclick="showTab('depoimento')">Depoimento</button>
     <button class="tab-button" onclick="showTab('mensagens')">Mensagens</button>
@@ -404,14 +404,14 @@
   </footer>
 
   <script>
-    function showTab(tabId) {
+    function showTab(tabId, event) {
       const contents = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-button');
       contents.forEach(c => c.classList.remove('active'));
       buttons.forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      event.target.classList.add('active');
-    }
+     event.target.classList.add('active');
+}
 
 const messages = [
   "Você me fez ver o mundo de uma forma diferente",
